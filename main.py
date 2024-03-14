@@ -37,5 +37,5 @@ async def joined(ctx, member: discord.Member):
 
 
 
-bot.run("MTIxNDIwODcyMzEwNzQ1NDk4Ng.GPwm-6.BNKDDl6YkQjkMohzTJK1i8nvKRaEgA0T4-QIIY")
+bot.run("ващ токен тут")
 
