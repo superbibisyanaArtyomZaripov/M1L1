@@ -1,8 +1,8 @@
 
 import discord
 import random
+import os
 from discord.ext import commands
-
 
 
 intents = discord.Intents.default()
@@ -12,11 +12,11 @@ bot = commands.Bot(command_prefix='/', intents=intents)
 
 @bot.event
 async def on_ready():
-    print('We have logged in as {bot.user}')
+    print(f'We have logged in as {bot.user}')
 
 @bot.command()
 async def hello(ctx):
-    await ctx.send('Привет Я бот!{bot.user}')
+    await ctx.send(f'Привет Я бот!{bot.user}')
 
 @bot.command()
 async def heh(ctx, count_heh = 5):
@@ -33,7 +33,7 @@ async def choose(ctx, *choices: str):
 @bot.command()
 async def joined(ctx, member: discord.Member):
     """Says when a member joined."""
-    await ctx.send('{member.name} joined {discord.utils.format_dt(member.joined_at)}')
+    await ctx.send(f'{member.name} joined {discord.utils.format_dt(member.joined_at)}')
 @bot.command()
 async def minus(ctx, left: int, right: int):
     """minus"""
@@ -52,8 +52,26 @@ async def rc(ctx):
     await ctx.send(rcl)
 @bot.command()
 async def helps(ctx):
-    await ctx.send("команда x умножает два числа команда divide делит два числа команда add плюсует два числа команда minus минусует два числа команда choose выбирает из разных строк команда rc выбирает рандомное число от 1 до 100")
-    
+    await ctx.send("команда x умножает два числа команда divide делит два числа команда add плюсует два числа команда minus минусует два числа команда choose выбирает из разных строк команда rc выбирает рандомное число от 1 до 100 команда nickname дает новое имя на сервере")
+@bot.command()
+async def nickname(ctx, nickname : str):
+    await ctx.send(f"{ctx.author.mention}, твой ник изменен на {nickname} !")
+    await ctx.author.edit(nick=nickname)
+@bot.command()
+async def mem(ctx):
+    s =os.listdir('images')
+    img_name = random.choice(s)
+    with open(f'images/{img_name}', 'rb') as f:
+            picture = discord.File(f)
+   # Можем передавать файл как параметр!
+    await ctx.send(file=picture)
+@bot.command()
+async def cats(ctx):
+    c = os.listdir('animals')
+    cats = random.choice(c)
+    with open(f'animals/{cats}', 'rb') as f:
+        pictur = discord.File(f)
+        await ctx.send(file=pictur)
 
-bot.run("ващ токен тут")
 
+bot.run("токен")
